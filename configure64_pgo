@@ -1,0 +1,1 @@
+-Dfft=fftw --buildtype=release -Ddefault_library=both

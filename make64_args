@@ -1,0 +1,1 @@
+LDFLAGS="${LDFLAGS} -Wl,--whole-archive /usr/lib/libvamp-sdk.a /usr/lib64/libsamplerate.a /usr/lib64/libfftw3l.a -pthread -ldl -Wl,--no-whole-archive"
