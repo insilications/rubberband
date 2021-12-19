@@ -1,5 +1,6 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+alsa-lib-dev
 binutils-dev
 binutils-extras
 bison
@@ -21,24 +22,19 @@ flac-staticdev
 flex
 gcc
 gcc-dev
-gcc-dev32
 gcc-doc
 gcc-go
 gcc-go-lib
-gcc-libgcc32
 gcc-libs-math
-gcc-libstdc++32
 gcc-libubsan
 gcc-locale
 gdb-dev
 git
 glibc-bin
 glibc-dev
-glibc-dev32
 glibc-doc
 glibc-extras
 glibc-lib-avx2
-glibc-libc32
 glibc-locale
 glibc-nscd
 glibc-staticdev
@@ -72,20 +68,12 @@ meson
 mpc-dev
 mpfr-dev
 ncurses
-ncurses-abi
-ncurses-bin
-ncurses-data
-ncurses-data-rare
 ncurses-dev
-ncurses-dev32
-ncurses-lib
-ncurses-lib32
-ncurses-lib-narrow
-ncurses-lib-plusplus
 ninja
 opus
 opus-dev
 opus-staticdev
+pkg-config
 procps-ng
 Pygments
 python3-dev
@@ -108,7 +96,5 @@ xz-dev
 xz-staticdev
 yaml
 yaml-cpp
-Z3-dev
-Z3-staticdev
 zlib-dev
 zlib-staticdev
