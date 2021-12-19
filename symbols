@@ -77,8 +77,8 @@ librubberband.so.2:_ZGTtNSt16invalid_argumentD2Ev
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRC19resampleInterleavedEPfiPKfidb
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRC5resetEv
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRC8resampleEPrKPfiPrKPKfidb
-librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCC1ENS_9Resampler7QualityEidii
-librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCC2ENS_9Resampler7QualityEidii
+librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCC1ENS_9Resampler7QualityENS2_11RatioChangeEidii
+librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCC2ENS_9Resampler7QualityENS2_11RatioChangeEidii
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCD0Ev
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCD1Ev
 librubberband.so.2:_ZN10RubberBand10Resamplers5D_SRCD2Ev
@@ -95,8 +95,9 @@ librubberband.so.2:_ZN10RubberBand16SilentAudioCurveD0Ev
 librubberband.so.2:_ZN10RubberBand16SilentAudioCurveD1Ev
 librubberband.so.2:_ZN10RubberBand16SilentAudioCurveD2Ev
 librubberband.so.2:_ZN10RubberBand17StretchCalculator14setKeyFrameMapERKSt3mapImmSt4lessImESaISt4pairIKmmEEE
-librubberband.so.2:_ZN10RubberBand17StretchCalculator15calculateSingleEdfm
+librubberband.so.2:_ZN10RubberBand17StretchCalculator15calculateSingleEddfmmm
 librubberband.so.2:_ZN10RubberBand17StretchCalculator16distributeRegionERKSt6vectorIfSaIfEEmfb
+librubberband.so.2:_ZN10RubberBand17StretchCalculator16expectedOutFrameEld
 librubberband.so.2:_ZN10RubberBand17StretchCalculator5resetEv
 librubberband.so.2:_ZN10RubberBand17StretchCalculator8mapPeaksERSt6vectorINS0_4PeakESaIS2_EERS1_ImSaImEEmm
 librubberband.so.2:_ZN10RubberBand17StretchCalculator8smoothDFERKSt6vectorIfSaIfEE
@@ -256,7 +257,6 @@ librubberband.so.2:_ZN10RubberBand3FFT18inverseInterleavedEPKdPd
 librubberband.so.2:_ZN10RubberBand3FFT18inverseInterleavedEPKfPf
 librubberband.so.2:_ZN10RubberBand3FFT24getDefaultImplementationB5cxx11Ev
 librubberband.so.2:_ZN10RubberBand3FFT24setDefaultImplementationENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
-librubberband.so.2:_ZN10RubberBand3FFT25pickDefaultImplementationEv
 librubberband.so.2:_ZN10RubberBand3FFT7forwardEPKdPdS3_
 librubberband.so.2:_ZN10RubberBand3FFT7forwardEPKfPfS3_
 librubberband.so.2:_ZN10RubberBand3FFT7inverseEPKdS2_Pd
@@ -372,7 +372,9 @@ librubberband.so.2:_ZNK10RubberBand19RubberBandStretcher4Impl9availableEv
 librubberband.so.2:_ZNK10RubberBand19RubberBandStretcher8retrieveEPKPfm
 librubberband.so.2:_ZNK10RubberBand19RubberBandStretcher9availableEv
 librubberband.so.2:_ZNK10RubberBand3FFT22getSupportedPrecisionsEv
+librubberband.so.2:_ZNK10RubberBand3FFT7getSizeEv
 librubberband.so.2:_ZNK10RubberBand9Resampler15getChannelCountEv
+librubberband.so.2:_ZNK10RubberBand9Resampler17getEffectiveRatioEd
 librubberband.so.2:_ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj
 librubberband.so.2:_ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE
 librubberband.so.2:_ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv
@@ -1696,8 +1698,6 @@ librubberband.so.2:fftw_dht_rader_register
 librubberband.so.2:fftw_dimcmp
 librubberband.so.2:fftw_elapsed_since
 librubberband.so.2:fftw_execute
-librubberband.so.2:fftw_export_wisdom_to_file
-librubberband.so.2:fftw_export_wisdom_to_filename
 librubberband.so.2:fftw_extract_reim
 librubberband.so.2:fftw_factors_into
 librubberband.so.2:fftw_factors_into_small_primes
@@ -1717,8 +1717,6 @@ librubberband.so.2:fftw_ifree
 librubberband.so.2:fftw_ifree0
 librubberband.so.2:fftw_imax
 librubberband.so.2:fftw_imin
-librubberband.so.2:fftw_import_wisdom_from_file
-librubberband.so.2:fftw_import_wisdom_from_filename
 librubberband.so.2:fftw_is_prime
 librubberband.so.2:fftw_isqrt
 librubberband.so.2:fftw_join_taint
@@ -1755,8 +1753,6 @@ librubberband.so.2:fftw_mkplan_hc2hc
 librubberband.so.2:fftw_mkplan_rdft
 librubberband.so.2:fftw_mkplan_rdft2
 librubberband.so.2:fftw_mkplanner
-librubberband.so.2:fftw_mkprinter
-librubberband.so.2:fftw_mkprinter_file
 librubberband.so.2:fftw_mkproblem
 librubberband.so.2:fftw_mkproblem_dft
 librubberband.so.2:fftw_mkproblem_dft_d
@@ -1769,7 +1765,6 @@ librubberband.so.2:fftw_mkproblem_rdft_1
 librubberband.so.2:fftw_mkproblem_rdft_1_d
 librubberband.so.2:fftw_mkproblem_rdft_d
 librubberband.so.2:fftw_mkproblem_unsolvable
-librubberband.so.2:fftw_mkscanner
 librubberband.so.2:fftw_mksolver
 librubberband.so.2:fftw_mksolver_ct
 librubberband.so.2:fftw_mksolver_dft_direct
@@ -1812,7 +1807,6 @@ librubberband.so.2:fftw_plan_many_dft_r2c
 librubberband.so.2:fftw_plan_null_destroy
 librubberband.so.2:fftw_planner_destroy
 librubberband.so.2:fftw_power_mod
-librubberband.so.2:fftw_printer_destroy
 librubberband.so.2:fftw_problem_destroy
 librubberband.so.2:fftw_rader_tl_delete
 librubberband.so.2:fftw_rader_tl_find
@@ -1854,7 +1848,6 @@ librubberband.so.2:fftw_reodft11e_radix2_r2hc_register
 librubberband.so.2:fftw_reodft_conf_standard
 librubberband.so.2:fftw_rodft00e_r2hc_pad_register
 librubberband.so.2:fftw_safe_mulmod
-librubberband.so.2:fftw_scanner_destroy
 librubberband.so.2:fftw_set_planner_hooks
 librubberband.so.2:fftw_set_timelimit
 librubberband.so.2:fftw_solver_destroy
