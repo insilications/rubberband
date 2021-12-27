@@ -1,1 +1,8 @@
 meson test --verbose --num-processes 1 -C builddir || :
+pushd builddir/
+./rubberband --threads -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter2.wav
+./rubberband --threads -c 1 -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter3.wav
+./rubberband --threads -c 6 -t 2.5 -p 2.0 ../sample/otter.wav ../sample/otter4.wav
+./rubberband --threads --realtime --pitch-hq -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter5.wav
+./rubberband --threads -c 0 --smoothing --window-long -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter6.wav
+popd

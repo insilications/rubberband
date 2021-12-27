@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : rubberband
 Version  : 2.0.0
-Release  : 307
+Release  : 309
 URL      : file:///aot/build/clearlinux/packages/rubberband/rubberband-v2.0.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/rubberband/rubberband-v2.0.0.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/rubberband/car.tar.gz
@@ -135,7 +135,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640561719
+export SOURCE_DATE_EPOCH=1640565391
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -239,8 +239,11 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --li
 -Dresampler=libsamplerate builddir
 ## make_prepend content
 # sd "/usr/lib64/libfftw3.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libfftw3\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 # sd "/usr/lib64/libsamplerate.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsamplerate.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libsamplerate\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsamplerate.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 # sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libsndfile\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 ## make_prepend end
 ninja --verbose %{?_smp_mflags} -C builddir
 
@@ -248,6 +251,13 @@ ninja --verbose %{?_smp_mflags} -C builddir
 unset LD_LIBRARY_PATH
 unset LIBRARY_PATH
 meson test --verbose --num-processes 1 -C builddir || :
+pushd builddir/
+./rubberband -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter2.wav
+./rubberband -c 1 -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter3.wav
+./rubberband -c 6 -t 2.5 -p 2.0 ../sample/otter.wav ../sample/otter4.wav
+./rubberband --realtime --pitch-hq -t 1.5 -p 2.0 ../sample/otter.wav ../sample/otter5.wav
+popd
+exit 1
 export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/gbm:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 ## profile_payload end
@@ -268,8 +278,11 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --li
 -Dresampler=libsamplerate  builddir
 ## make_prepend content
 # sd "/usr/lib64/libfftw3.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libfftw3\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libfftw3.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 # sd "/usr/lib64/libsamplerate.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsamplerate.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libsamplerate\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsamplerate.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 # sd "/usr/lib64/libsndfile.so" -- "-Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive" $(fd -uu --glob *.ninja)
+sd '(LINK_ARGS.+)(\s/usr/lib64/libsndfile\.so)' -- '$1 -Wl,--whole-archive,--as-needed,--allow-multiple-definition,/usr/lib64/libsndfile.a,/usr/lib64/libFLAC.a,/usr/lib64/libopus.a,/usr/lib64/libvorbis.a,/usr/lib64/libvorbisenc.a,/usr/lib64/libvorbisfile.a,/usr/lib64/libogg.a,-lpthread,-ldl,-lm,-lmvec,--no-whole-archive' $(fd -uu --glob *.ninja)
 ## make_prepend end
 ninja --verbose %{?_smp_mflags} -C builddir
 fi
