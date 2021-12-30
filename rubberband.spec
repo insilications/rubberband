@@ -5,13 +5,16 @@
 %define keepstatic 1
 Name     : rubberband
 Version  : 2.0.0
-Release  : 311
+Release  : 312
 URL      : file:///aot/build/clearlinux/packages/rubberband/rubberband-v2.0.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/rubberband/rubberband-v2.0.0.tar.gz
 Source1  : file:///aot/build/clearlinux/packages/rubberband/car.tar.gz
 Summary  : No summary provided
 Group    : Development/Tools
 License  : GPL-2.0
+Requires: rubberband-bin = %{version}-%{release}
+Requires: rubberband-data = %{version}-%{release}
+Requires: rubberband-lib = %{version}-%{release}
 BuildRequires : PyYAML
 BuildRequires : Pygments
 BuildRequires : Sphinx
@@ -21,7 +24,6 @@ BuildRequires : binutils-extras
 BuildRequires : bison
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
-BuildRequires : buildreq-meson
 BuildRequires : cmake
 BuildRequires : dejagnu
 BuildRequires : docbook-utils
@@ -120,6 +122,54 @@ BuildRequires : zlib-staticdev
 # Rubber Band Library
 An audio time-stretching and pitch-shifting library and utility program.
 
+%package bin
+Summary: bin components for the rubberband package.
+Group: Binaries
+Requires: rubberband-data = %{version}-%{release}
+
+%description bin
+bin components for the rubberband package.
+
+
+%package data
+Summary: data components for the rubberband package.
+Group: Data
+
+%description data
+data components for the rubberband package.
+
+
+%package dev
+Summary: dev components for the rubberband package.
+Group: Development
+Requires: rubberband-lib = %{version}-%{release}
+Requires: rubberband-bin = %{version}-%{release}
+Requires: rubberband-data = %{version}-%{release}
+Provides: rubberband-devel = %{version}-%{release}
+Requires: rubberband = %{version}-%{release}
+
+%description dev
+dev components for the rubberband package.
+
+
+%package lib
+Summary: lib components for the rubberband package.
+Group: Libraries
+Requires: rubberband-data = %{version}-%{release}
+
+%description lib
+lib components for the rubberband package.
+
+
+%package staticdev
+Summary: staticdev components for the rubberband package.
+Group: Default
+Requires: rubberband-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the rubberband package.
+
+
 %prep
 %setup -q -n rubberband
 cd %{_builddir}
@@ -136,7 +186,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640835256
+export SOURCE_DATE_EPOCH=1640835397
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -293,3 +343,31 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/rubberband
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/ladspa/rdf/ladspa-rubberband.rdf
+
+%files dev
+%defattr(-,root,root,-)
+/usr/include/rubberband/RubberBandStretcher.h
+/usr/include/rubberband/rubberband-c.h
+/usr/lib64/ladspa/ladspa-rubberband.cat
+/usr/lib64/ladspa/ladspa-rubberband.so
+/usr/lib64/librubberband.so
+/usr/lib64/pkgconfig/rubberband.pc
+/usr/lib64/vamp/vamp-rubberband.cat
+/usr/lib64/vamp/vamp-rubberband.so
+
+%files lib
+%defattr(-,root,root,-)
+/usr/lib64/librubberband.so.2
+/usr/lib64/librubberband.so.2.1.5
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/librubberband.a
